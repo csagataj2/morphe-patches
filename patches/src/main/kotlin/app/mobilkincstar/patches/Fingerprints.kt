@@ -49,3 +49,19 @@ object TamperReporterFingerprint : Fingerprint(
     returnType = "V",
     parameters = listOf("Ljava/lang/String;")
 )
+
+object TamperThreadStarterFingerprint : Fingerprint(
+    definingClass = "Ligknimiyn/k;",
+    name = "b",
+    accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.STATIC),
+    returnType = "V",
+    parameters = listOf()
+)
+
+object MainApplicationOnCreateFingerprint : Fingerprint(
+    definingClass = "Lcom/mobilkincstar/MainApplication;",
+    name = "onCreate",
+    accessFlags = listOf(AccessFlags.PUBLIC),
+    returnType = "V",
+    parameters = listOf()
+)

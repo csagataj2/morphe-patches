@@ -7,7 +7,7 @@ import app.mobilkincstar.patches.shared.Constants.COMPATIBILITY_MOBILKINCSTAR
 @Suppress("unused")
 val antiTamperPatch = bytecodePatch(
     name = "Disable Tamper Protection",
-    description = "Prevents the application from crashing when it detects modifications.",
+    description = "Prevents the application from crashing or hanging when it detects modifications.",
     default = true
 ) {
     compatibleWith(COMPATIBILITY_MOBILKINCSTAR)
@@ -16,6 +16,22 @@ val antiTamperPatch = bytecodePatch(
         TamperReporterFingerprint.method.addInstructions(
             0,
             """
+                return-void
+            """
+        )
+
+        TamperThreadStarterFingerprint.method.addInstructions(
+            0,
+            """
+                return-void
+            """
+        )
+
+        MainApplicationOnCreateFingerprint.method.addInstructions(
+            0,
+            """
+                invoke-super {p0}, Ligknimiyn/O;->onCreate()V
+                invoke-static {p0}, Lcom/facebook/react/z;->a(Landroid/content/Context;)V
                 return-void
             """
         )
