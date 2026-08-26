@@ -1,6 +1,6 @@
 {
   "NOTE": "Do NOT manually edit this file. This file is automatically updated when semantic release (release.yml) runs. Manually editing this file can break your releases and break third party tools that use this file.",
-  "version": "1.0.1-dev.3",
+  "version": "1.0.1-dev.4",
   "patches": [
     {
       "name": "Disable Keyboard Discrimination",
@@ -32,7 +32,7 @@
     },
     {
       "name": "Disable Root Detection",
-      "description": "Disables root detection checks in MobilKincstár.",
+      "description": "Disables all root detection checks in MobilKincstár.",
       "default": true,
       "dependencies": [],
       "compatiblePackages": [
@@ -88,8 +88,8 @@
     },
     {
       "name": "Disable Screenshot Protection",
-      "description": "Allows taking screenshots and screen recording in MobilKincstár. (Currently disabled due to compatibility issues)",
-      "default": false,
+      "description": "Allows taking screenshots and screen recording in MobilKincstár.",
+      "default": true,
       "dependencies": [],
       "compatiblePackages": [
         {
@@ -116,7 +116,7 @@
     },
     {
       "name": "Disable Tamper Protection",
-      "description": "Prevents the application from crashing or hanging when it detects modifications.",
+      "description": "Aggressively bypasses the protector's monitoring services and initialization.",
       "default": true,
       "dependencies": [],
       "compatiblePackages": [

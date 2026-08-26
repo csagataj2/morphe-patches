@@ -1,3 +1,9 @@
+## [1.0.1-dev.4](https://github.com/csagataj2/morphe-patches/compare/v1.0.1-dev.3...v1.0.1-dev.4) (2026-08-26)
+
+### 🐛 Bug Fixes
+
+* aggressively kill protector services and hooks to resolve hang ([279a18b](https://github.com/csagataj2/morphe-patches/commit/279a18bbe5295cd5d33332b5add3a9dd5ee50507))
+
 ## [1.0.1-dev.3](https://github.com/csagataj2/morphe-patches/compare/v1.0.1-dev.2...v1.0.1-dev.3) (2026-08-26)
 
 ### 🐛 Bug Fixes
