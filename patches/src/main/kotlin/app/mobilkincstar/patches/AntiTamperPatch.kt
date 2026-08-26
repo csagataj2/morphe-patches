@@ -3,6 +3,7 @@ package app.mobilkincstar.patches
 import app.morphe.patcher.extensions.InstructionExtensions.addInstructions
 import app.morphe.patcher.patch.bytecodePatch
 import app.mobilkincstar.patches.shared.Constants.COMPATIBILITY_MOBILKINCSTAR
+import com.android.tools.smali.dexlib2.AccessFlags
 
 @Suppress("unused")
 val antiTamperPatch = bytecodePatch(
@@ -13,7 +14,7 @@ val antiTamperPatch = bytecodePatch(
     compatibleWith(COMPATIBILITY_MOBILKINCSTAR)
 
     execute {
-        // 1. Disable the reporter that triggers the crash
+        // 1. Disable the reporter that triggers the crash (Java method)
         TamperReporterFingerprint.method.addInstructions(
             0,
             """
@@ -21,7 +22,7 @@ val antiTamperPatch = bytecodePatch(
             """
         )
 
-        // 2. Disable the watchdog thread starter
+        // 2. Disable the watchdog thread starter (Java method)
         TamperThreadStarterFingerprint.method.addInstructions(
             0,
             """
@@ -30,15 +31,20 @@ val antiTamperPatch = bytecodePatch(
         )
 
         // 3. Force Integrity Flag to false (tampered = false)
-        IntegrityStatusFingerprint.method.addInstructions(
-            0,
-            """
-                const/4 v0, 0x0
-                return v0
-            """
-        )
+        // This is a NATIVE method, we must de-native it first.
+        IntegrityStatusFingerprint.method.apply {
+            accessFlags = accessFlags and AccessFlags.NATIVE.inv()
+            addInstructions(
+                0,
+                """
+                    const/4 v0, 0x0
+                    return v0
+                """
+            )
+        }
 
         // 4. Sanitize Protector Initialization (only load library)
+        // This is a Java method that calls native methods.
         ProtectorInitFingerprint.method.addInstructions(
             0,
             """
@@ -48,21 +54,17 @@ val antiTamperPatch = bytecodePatch(
             """
         )
 
-        ProtectorInitInternalFingerprint.method.addInstructions(
-            0,
-            """
-                return-void
-            """
-        )
-
-        // 5. Bypass Protector Lifecycle Hooks
-        ProtectorBaseOnCreateFingerprint.method.addInstructions(
-            0,
-            """
-                invoke-super {p0}, Landroid/app/Application;->onCreate()V
-                return-void
-            """
-        )
+        // 5. Bypass Protector Lifecycle Hooks (Native method)
+        ProtectorBaseOnCreateFingerprint.method.apply {
+            accessFlags = accessFlags and AccessFlags.NATIVE.inv()
+            addInstructions(
+                0,
+                """
+                    invoke-super {p0}, Landroid/app/Application;->onCreate()V
+                    return-void
+                """
+            )
+        }
 
         // 6. Force React Native Initialization in MainApplication
         MainApplicationOnCreateFingerprint.method.addInstructions(
@@ -98,8 +100,8 @@ val antiTamperPatch = bytecodePatch(
                 return-void
             """
         )
-
-        // 8. Disable Protector's activity lifecycle monitoring
+        
+        // 8. Disable activity lifecycle callbacks
         ProtectorLifecycleFingerprint.method.addInstructions(
             0,
             """
