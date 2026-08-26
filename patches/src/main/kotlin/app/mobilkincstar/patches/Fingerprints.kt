@@ -9,21 +9,7 @@ object BiometricUtilsFingerprint : Fingerprint(
     name = "isDeviceRooted",
     accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.FINAL),
     returnType = "Z",
-    parameters = listOf("Landroid/content/Context;"),
-    filters = listOf(
-        methodCall(
-            definingClass = "Lcom/sbaiahmed1/reactnativebiometrics/BiometricUtils;",
-            name = "checkRootMethod1"
-        )
-    )
-)
-
-object ScreenshotProtectionFingerprint : Fingerprint(
-    definingClass = "Ligknimiyn/C1570f;",
-    name = "a",
-    accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.STATIC),
-    returnType = "V",
-    parameters = listOf("Landroid/view/Window;", "I", "I")
+    parameters = listOf("Landroid/content/Context;")
 )
 
 object SSLPinningFingerprint : Fingerprint(
@@ -58,29 +44,6 @@ object TamperThreadStarterFingerprint : Fingerprint(
     parameters = listOf()
 )
 
-object MainApplicationOnCreateFingerprint : Fingerprint(
-    definingClass = "Lcom/mobilkincstar/MainApplication;",
-    name = "onCreate",
-    accessFlags = listOf(AccessFlags.PUBLIC),
-    returnType = "V",
-    parameters = listOf(),
-    filters = listOf(
-        methodCall(
-            definingClass = "Ligknimiyn/ac;",
-            name = "d",
-            returnType = "Z"
-        )
-    )
-)
-
-object ProtectorRegistrationFingerprint : Fingerprint(
-    definingClass = "Ligknimiyn/E;",
-    name = "a",
-    accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.STATIC),
-    returnType = "V",
-    parameters = listOf("Ljava/lang/Class;", "I")
-)
-
 object IntegrityStatusFingerprint : Fingerprint(
     definingClass = "Ligknimiyn/ac;",
     name = "d",
@@ -92,7 +55,7 @@ object IntegrityStatusFingerprint : Fingerprint(
 object ProtectorInitFingerprint : Fingerprint(
     definingClass = "Ligknimiyn/ac;",
     name = "c",
-    accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.STATIC, AccessFlags.SYNCHRONIZED),
+    accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.STATIC),
     returnType = "V",
     parameters = listOf()
 )
@@ -100,7 +63,7 @@ object ProtectorInitFingerprint : Fingerprint(
 object ProtectorInitInternalFingerprint : Fingerprint(
     definingClass = "Ligknimiyn/ac;",
     name = "d",
-    accessFlags = listOf(AccessFlags.PRIVATE, AccessFlags.STATIC, AccessFlags.SYNCHRONIZED),
+    accessFlags = listOf(AccessFlags.PRIVATE, AccessFlags.STATIC),
     returnType = "V",
     parameters = listOf("Ligknimiyn/O;")
 )
@@ -111,4 +74,20 @@ object ProtectorBaseOnCreateFingerprint : Fingerprint(
     accessFlags = listOf(AccessFlags.PUBLIC),
     returnType = "V",
     parameters = listOf()
+)
+
+object MainApplicationOnCreateFingerprint : Fingerprint(
+    definingClass = "Lcom/mobilkincstar/MainApplication;",
+    name = "onCreate",
+    accessFlags = listOf(AccessFlags.PUBLIC),
+    returnType = "V",
+    parameters = listOf()
+)
+
+object ReactModalScreenshotFingerprint : Fingerprint(
+    definingClass = "Lcom/facebook/react/views/modal/d;",
+    name = "f",
+    accessFlags = listOf(AccessFlags.PRIVATE),
+    returnType = "V",
+    parameters = listOf("Landroid/view/Window;")
 )
