@@ -27,6 +27,30 @@ val antiTamperPatch = bytecodePatch(
             """
         )
 
+        ProtectorInitFingerprint.method.addInstructions(
+            0,
+            """
+                const-string v0, "dorsum_clavis_kincstar"
+                invoke-static {v0}, Ljava/lang/System;->loadLibrary(Ljava/lang/String;)V
+                return-void
+            """
+        )
+
+        ProtectorInitInternalFingerprint.method.addInstructions(
+            0,
+            """
+                return-void
+            """
+        )
+
+        ProtectorBaseOnCreateFingerprint.method.addInstructions(
+            0,
+            """
+                invoke-super {p0}, Landroid/app/Application;->onCreate()V
+                return-void
+            """
+        )
+
         MainApplicationOnCreateFingerprint.method.addInstructions(
             0,
             """

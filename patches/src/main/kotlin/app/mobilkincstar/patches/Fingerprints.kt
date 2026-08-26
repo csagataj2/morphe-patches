@@ -63,5 +63,52 @@ object MainApplicationOnCreateFingerprint : Fingerprint(
     name = "onCreate",
     accessFlags = listOf(AccessFlags.PUBLIC),
     returnType = "V",
+    parameters = listOf(),
+    filters = listOf(
+        methodCall(
+            definingClass = "Ligknimiyn/ac;",
+            name = "d",
+            returnType = "Z"
+        )
+    )
+)
+
+object ProtectorRegistrationFingerprint : Fingerprint(
+    definingClass = "Ligknimiyn/E;",
+    name = "a",
+    accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.STATIC),
+    returnType = "V",
+    parameters = listOf("Ljava/lang/Class;", "I")
+)
+
+object IntegrityStatusFingerprint : Fingerprint(
+    definingClass = "Ligknimiyn/ac;",
+    name = "d",
+    accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.STATIC),
+    returnType = "Z",
+    parameters = listOf()
+)
+
+object ProtectorInitFingerprint : Fingerprint(
+    definingClass = "Ligknimiyn/ac;",
+    name = "c",
+    accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.STATIC, AccessFlags.SYNCHRONIZED),
+    returnType = "V",
+    parameters = listOf()
+)
+
+object ProtectorInitInternalFingerprint : Fingerprint(
+    definingClass = "Ligknimiyn/ac;",
+    name = "d",
+    accessFlags = listOf(AccessFlags.PRIVATE, AccessFlags.STATIC, AccessFlags.SYNCHRONIZED),
+    returnType = "V",
+    parameters = listOf("Ligknimiyn/O;")
+)
+
+object ProtectorBaseOnCreateFingerprint : Fingerprint(
+    definingClass = "Ligknimiyn/O;",
+    name = "onCreate",
+    accessFlags = listOf(AccessFlags.PUBLIC),
+    returnType = "V",
     parameters = listOf()
 )
