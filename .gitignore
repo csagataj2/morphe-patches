@@ -130,3 +130,7 @@ node_modules/
 local.properties
 
 decompiled/*
+*.mpp
+*.keystore
+morphe-data/
+logcat_output.txt
