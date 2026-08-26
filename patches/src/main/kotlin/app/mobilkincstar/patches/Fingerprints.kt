@@ -41,3 +41,11 @@ object KeyboardDetectionFingerprint : Fingerprint(
     returnType = "Z",
     parameters = listOf("Ljava/lang/String;")
 )
+
+object TamperReporterFingerprint : Fingerprint(
+    definingClass = "Ligknimiyn/k;",
+    name = "a",
+    accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.STATIC),
+    returnType = "V",
+    parameters = listOf("Ljava/lang/String;")
+)
