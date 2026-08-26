@@ -15,7 +15,7 @@ Click here to add these patches to Morphe: https://morphe.software/add-source?gi
 ## 🩹 Patches list
 
 <!-- PATCHES_START EXPANDED -->
-> **[v1.0.1-dev.2](https://github.com/csagataj2/morphe-patches/releases/tag/v1.0.1-dev.2)**&nbsp;&nbsp;•&nbsp;&nbsp;`dev`&nbsp;&nbsp;•&nbsp;&nbsp;5 patches total
+> **[v1.0.1-dev.3](https://github.com/csagataj2/morphe-patches/releases/tag/v1.0.1-dev.3)**&nbsp;&nbsp;•&nbsp;&nbsp;`dev`&nbsp;&nbsp;•&nbsp;&nbsp;5 patches total
 <details open>
 <summary>📦 MobilKincstár&nbsp;&nbsp;•&nbsp;&nbsp;5 patches</summary>
 <br>

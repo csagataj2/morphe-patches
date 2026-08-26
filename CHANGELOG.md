@@ -1,3 +1,9 @@
+## [1.0.1-dev.3](https://github.com/csagataj2/morphe-patches/compare/v1.0.1-dev.2...v1.0.1-dev.3) (2026-08-26)
+
+### 🐛 Bug Fixes
+
+* aggressively bypass protector's entry points and initialization to resolve hang ([83b4b2d](https://github.com/csagataj2/morphe-patches/commit/83b4b2de216c2f6a3654799bd7cfc6cd19343475))
+
 ## [1.0.1-dev.2](https://github.com/csagataj2/morphe-patches/compare/v1.0.1-dev.1...v1.0.1-dev.2) (2026-08-26)
 
 ### 🐛 Bug Fixes
