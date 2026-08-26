@@ -12,6 +12,22 @@ object BiometricUtilsFingerprint : Fingerprint(
     parameters = listOf("Landroid/content/Context;")
 )
 
+object BiometricUtilsCheck1Fingerprint : Fingerprint(
+    definingClass = "Lcom/sbaiahmed1/reactnativebiometrics/BiometricUtils;",
+    name = "checkRootMethod1",
+    accessFlags = listOf(AccessFlags.PRIVATE, AccessFlags.FINAL),
+    returnType = "Z",
+    parameters = listOf()
+)
+
+object BiometricUtilsCheck2Fingerprint : Fingerprint(
+    definingClass = "Lcom/sbaiahmed1/reactnativebiometrics/BiometricUtils;",
+    name = "checkRootMethod2",
+    accessFlags = listOf(AccessFlags.PRIVATE, AccessFlags.FINAL),
+    returnType = "Z",
+    parameters = listOf()
+)
+
 object SSLPinningFingerprint : Fingerprint(
     definingClass = "Lokhttp3/CertificatePinner;",
     name = "check",
@@ -90,4 +106,36 @@ object ReactModalScreenshotFingerprint : Fingerprint(
     accessFlags = listOf(AccessFlags.PRIVATE),
     returnType = "V",
     parameters = listOf("Landroid/view/Window;")
+)
+
+object ProtectorService1Fingerprint : Fingerprint(
+    definingClass = "Ligknimiyn/o;",
+    name = "onCreate",
+    accessFlags = listOf(AccessFlags.PUBLIC),
+    returnType = "V",
+    parameters = listOf()
+)
+
+object ProtectorService2Fingerprint : Fingerprint(
+    definingClass = "Ligknimiyn/n;",
+    name = "onCreate",
+    accessFlags = listOf(AccessFlags.PUBLIC),
+    returnType = "V",
+    parameters = listOf()
+)
+
+object ProtectorService3Fingerprint : Fingerprint(
+    definingClass = "Ligknimiyn/B;",
+    name = "onCreate",
+    accessFlags = listOf(AccessFlags.PUBLIC),
+    returnType = "V",
+    parameters = listOf()
+)
+
+object ProtectorLifecycleFingerprint : Fingerprint(
+    definingClass = "Ligknimiyn/C1571g;",
+    name = "onActivityResumed",
+    accessFlags = listOf(AccessFlags.PUBLIC),
+    returnType = "V",
+    parameters = listOf("Landroid/app/Activity;")
 )

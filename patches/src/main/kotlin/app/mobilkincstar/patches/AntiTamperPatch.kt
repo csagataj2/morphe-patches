@@ -7,12 +7,13 @@ import app.mobilkincstar.patches.shared.Constants.COMPATIBILITY_MOBILKINCSTAR
 @Suppress("unused")
 val antiTamperPatch = bytecodePatch(
     name = "Disable Tamper Protection",
-    description = "Prevents the application from crashing or hanging when it detects modifications.",
+    description = "Aggressively bypasses the protector's monitoring services and initialization.",
     default = true
 ) {
     compatibleWith(COMPATIBILITY_MOBILKINCSTAR)
 
     execute {
+        // 1. Disable the reporter that triggers the crash
         TamperReporterFingerprint.method.addInstructions(
             0,
             """
@@ -20,6 +21,7 @@ val antiTamperPatch = bytecodePatch(
             """
         )
 
+        // 2. Disable the watchdog thread starter
         TamperThreadStarterFingerprint.method.addInstructions(
             0,
             """
@@ -27,6 +29,16 @@ val antiTamperPatch = bytecodePatch(
             """
         )
 
+        // 3. Force Integrity Flag to false (tampered = false)
+        IntegrityStatusFingerprint.method.addInstructions(
+            0,
+            """
+                const/4 v0, 0x0
+                return v0
+            """
+        )
+
+        // 4. Sanitize Protector Initialization (only load library)
         ProtectorInitFingerprint.method.addInstructions(
             0,
             """
@@ -43,6 +55,7 @@ val antiTamperPatch = bytecodePatch(
             """
         )
 
+        // 5. Bypass Protector Lifecycle Hooks
         ProtectorBaseOnCreateFingerprint.method.addInstructions(
             0,
             """
@@ -51,11 +64,45 @@ val antiTamperPatch = bytecodePatch(
             """
         )
 
+        // 6. Force React Native Initialization in MainApplication
         MainApplicationOnCreateFingerprint.method.addInstructions(
             0,
             """
                 invoke-super {p0}, Ligknimiyn/O;->onCreate()V
                 invoke-static {p0}, Lcom/facebook/react/z;->a(Landroid/content/Context;)V
+                return-void
+            """
+        )
+
+        // 7. Disable Protector's isolated process services
+        ProtectorService1Fingerprint.method.addInstructions(
+            0,
+            """
+                invoke-virtual {p0}, Landroid/app/Service;->stopSelf()V
+                return-void
+            """
+        )
+
+        ProtectorService2Fingerprint.method.addInstructions(
+            0,
+            """
+                invoke-virtual {p0}, Landroid/app/Service;->stopSelf()V
+                return-void
+            """
+        )
+
+        ProtectorService3Fingerprint.method.addInstructions(
+            0,
+            """
+                invoke-virtual {p0}, Landroid/app/Service;->stopSelf()V
+                return-void
+            """
+        )
+
+        // 8. Disable Protector's activity lifecycle monitoring
+        ProtectorLifecycleFingerprint.method.addInstructions(
+            0,
+            """
                 return-void
             """
         )
