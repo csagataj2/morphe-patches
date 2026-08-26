@@ -1,6 +1,6 @@
 {
   "NOTE": "Do NOT manually edit this file. This file is automatically updated when semantic release (release.yml) runs. Manually editing this file can break your releases and break third party tools that use this file.",
-  "version": "1.0.1-dev.1",
+  "version": "1.0.1-dev.2",
   "patches": [
     {
       "name": "Disable Keyboard Discrimination",
@@ -88,8 +88,8 @@
     },
     {
       "name": "Disable Screenshot Protection",
-      "description": "Allows taking screenshots and screen recording in MobilKincstár.",
-      "default": true,
+      "description": "Allows taking screenshots and screen recording in MobilKincstár. (Currently disabled due to compatibility issues)",
+      "default": false,
       "dependencies": [],
       "compatiblePackages": [
         {
@@ -116,7 +116,7 @@
     },
     {
       "name": "Disable Tamper Protection",
-      "description": "Prevents the application from crashing when it detects modifications.",
+      "description": "Prevents the application from crashing or hanging when it detects modifications.",
       "default": true,
       "dependencies": [],
       "compatiblePackages": [

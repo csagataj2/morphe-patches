@@ -1,3 +1,9 @@
+## [1.0.1-dev.2](https://github.com/csagataj2/morphe-patches/compare/v1.0.1-dev.1...v1.0.1-dev.2) (2026-08-26)
+
+### 🐛 Bug Fixes
+
+* resolve hang by bypassing protector's onCreate flow and disabling faulty native patch ([3489692](https://github.com/csagataj2/morphe-patches/commit/34896921b031ad87bf1ffde01e095b29702860ee))
+
 ## [1.0.1-dev.1](https://github.com/csagataj2/morphe-patches/compare/v1.0.0...v1.0.1-dev.1) (2026-08-26)
 
 ### 🐛 Bug Fixes
