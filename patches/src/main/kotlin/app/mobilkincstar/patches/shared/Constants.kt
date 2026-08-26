@@ -1,4 +1,4 @@
-package app.template.patches.shared
+package app.mobilkincstar.patches.shared
 
 import app.morphe.patcher.patch.ApkFileType
 import app.morphe.patcher.patch.AppTarget
@@ -70,6 +70,21 @@ object Constants {
                 versionCodes = mapOf(
                     SupportedAbi.ARM64_V8A to 584009457,
                     SupportedAbi.ARMEABI_V7A to 584119423
+                )
+            )
+        )
+    )
+
+    val COMPATIBILITY_MOBILKINCSTAR = Compatibility(
+        name = "MobilKincstár",
+        packageName = "hu.dorsum.clavis.kincstar.mobile",
+        apkFileType = ApkFileType.APK,
+        appIconColor = 0x0058A3, // Primary blue color from Kincstár
+        targets = listOf(
+            AppTarget(
+                version = "8.10.1-1",
+                versionCodes = mapOf(
+                    SupportedAbi.ARM64_V8A to 827
                 )
             )
         )
