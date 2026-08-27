@@ -14,7 +14,7 @@ val antiTamperPatch = bytecodePatch(
     compatibleWith(COMPATIBILITY_MOBILKINCSTAR)
 
     execute {
-        // 1. Disable the reporter that triggers the crash (Java method)
+        // 1. Disable the reporter that triggers the crash
         TamperReporterFingerprint.method.addInstructions(
             0,
             """
@@ -22,7 +22,7 @@ val antiTamperPatch = bytecodePatch(
             """
         )
 
-        // 2. Disable the watchdog thread starter (Java method)
+        // 2. Disable the watchdog thread starter
         TamperThreadStarterFingerprint.method.addInstructions(
             0,
             """
@@ -31,7 +31,7 @@ val antiTamperPatch = bytecodePatch(
         )
 
         // 3. Force Integrity Flag to false (tampered = false)
-        // This is a NATIVE method, we must de-native it first.
+        // De-native to avoid signature checks in libdorsum_clavis_kincstar.so
         IntegrityStatusFingerprint.method.apply {
             accessFlags = accessFlags and AccessFlags.NATIVE.inv()
             addInstructions(
@@ -43,18 +43,15 @@ val antiTamperPatch = bytecodePatch(
             )
         }
 
-        // 4. Sanitize Protector Initialization (only load library)
-        // This is a Java method that calls native methods.
+        // 4. Disable Protector Initialization completely (Don't load native library)
         ProtectorInitFingerprint.method.addInstructions(
             0,
             """
-                const-string v0, "dorsum_clavis_kincstar"
-                invoke-static {v0}, Ljava/lang/System;->loadLibrary(Ljava/lang/String;)V
                 return-void
             """
         )
 
-        // 5. Bypass Protector Lifecycle Hooks (Native method)
+        // 5. De-native other protector entry points
         ProtectorBaseOnCreateFingerprint.method.apply {
             accessFlags = accessFlags and AccessFlags.NATIVE.inv()
             addInstructions(
@@ -77,36 +74,11 @@ val antiTamperPatch = bytecodePatch(
         )
 
         // 7. Disable Protector's isolated process services
-        ProtectorService1Fingerprint.method.addInstructions(
-            0,
-            """
-                invoke-virtual {p0}, Landroid/app/Service;->stopSelf()V
-                return-void
-            """
-        )
-
-        ProtectorService2Fingerprint.method.addInstructions(
-            0,
-            """
-                invoke-virtual {p0}, Landroid/app/Service;->stopSelf()V
-                return-void
-            """
-        )
-
-        ProtectorService3Fingerprint.method.addInstructions(
-            0,
-            """
-                invoke-virtual {p0}, Landroid/app/Service;->stopSelf()V
-                return-void
-            """
-        )
+        ProtectorService1Fingerprint.method.addInstructions(0, "return-void")
+        ProtectorService2Fingerprint.method.addInstructions(0, "return-void")
+        ProtectorService3Fingerprint.method.addInstructions(0, "return-void")
         
         // 8. Disable activity lifecycle callbacks
-        ProtectorLifecycleFingerprint.method.addInstructions(
-            0,
-            """
-                return-void
-            """
-        )
+        ProtectorLifecycleFingerprint.method.addInstructions(0, "return-void")
     }
 }
